@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Inherit CRM Lead Form View to add Meta tracking fields -->
+    <record id="view_crm_lead_form_meta_tracking" model="ir.ui.view">
+        <field name="name">crm.lead.form.meta.tracking</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='extra']" position="after">
+                <page string="Meta Tracking" name="meta_tracking">
+                    <group>
+                        <group string="Meta Lead Information">
+                            <field name="meta_lead_id" readonly="1"/>
+                            <field name="meta_form_id" readonly="1"/>
+                            <field name="meta_page_id" readonly="1"/>
+                            <field name="meta_created_time" readonly="1"/>
+                        </group>
+                        <group string="Meta Campaign Information">
+                            <field name="meta_ad_id" readonly="1"/>
+                            <field name="meta_adset_id" readonly="1"/>
+                            <field name="meta_campaign_id" readonly="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Meta Tracking Cookies">
+                            <field name="meta_fbclid" readonly="1"/>
+                            <field name="meta_fbc" readonly="1"/>
+                            <field name="meta_fbp" readonly="1"/>
+                        </group>
+                        <group string="Event Status">
+                            <field name="meta_event_sent" readonly="1"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Add Meta fields to CRM Lead Tree View (optional columns) -->
+    <record id="view_crm_lead_tree_meta_tracking" model="ir.ui.view">
+        <field name="name">crm.lead.tree.meta.tracking</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_tree_view_leads"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='create_date']" position="after">
+                <field name="meta_lead_id" optional="hide"/>
+                <field name="meta_ad_id" optional="hide"/>
+                <field name="meta_event_sent" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Search Filter for leads with Meta tracking -->
+    <record id="view_crm_lead_search_meta_tracking" model="ir.ui.view">
+        <field name="name">crm.lead.search.meta.tracking</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.view_crm_case_leads_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='my']" position="after">
+                <separator/>
+                <filter string="From Meta/Facebook" name="from_meta" 
+                        domain="['|', '|', ('meta_lead_id', '!=', False), ('meta_ad_id', '!=', False), ('meta_fbclid', '!=', False)]"/>
+                <filter string="QualifiedLead Sent" name="qualified_sent" 
+                        domain="[('meta_event_sent', '=', True)]"/>
+                <filter string="QualifiedLead Not Sent" name="qualified_not_sent" 
+                        domain="[('meta_event_sent', '=', False), '|', '|', ('meta_lead_id', '!=', False), ('meta_ad_id', '!=', False), ('meta_fbclid', '!=', False)]"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

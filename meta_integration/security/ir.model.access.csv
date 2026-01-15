@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_meta_message_user,meta.message.user,model_meta_message,base.group_user,1,1,1,0
+access_meta_message_manager,meta.message.manager,model_meta_message,base.group_system,1,1,1,1
+access_meta_outgoing_event_user,meta.outgoing.event.user,model_meta_outgoing_event,base.group_user,1,1,1,0
+access_meta_outgoing_event_manager,meta.outgoing.event.manager,model_meta_outgoing_event,base.group_system,1,1,1,1
