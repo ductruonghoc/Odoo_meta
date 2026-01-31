@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ads_subscription_user,ads.subscription.user,model_ads_subscription,base.group_user,1,1,1,0
+access_ads_subscription_manager,ads.subscription.manager,model_ads_subscription,base.group_system,1,1,1,1
+access_meta_webhook_event_user,ads.meta.webhook.event.user,model_ads_meta_webhook_event,base.group_user,1,1,1,0
+access_meta_webhook_event_manager,ads.meta.webhook.event.manager,model_ads_meta_webhook_event,base.group_system,1,1,1,1
+access_meta_event_push_user,ads.meta.event.push.user,model_ads_meta_event_push,base.group_user,1,1,1,0
+access_meta_event_push_manager,ads.meta.event.push.manager,model_ads_meta_event_push,base.group_system,1,1,1,1
+access_meta_event_config_user,meta.event.config.user,model_meta_event_config,base.group_user,1,1,1,0
+access_meta_event_config_manager,meta.event.config.manager,model_meta_event_config,base.group_system,1,1,1,1

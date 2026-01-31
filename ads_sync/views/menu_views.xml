@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Root Menu -->
+    <menuitem id="menu_ads_sync_root"
+              name="Ads Sync"
+              web_icon="ads_sync,static/description/icon.png"
+              action="action_ads_subscription"
+              sequence="100"/>
+
+    <!-- Subscriptions Menu Item -->
+    <!-- <menuitem id="menu_ads_subscription"
+              name="Subscriptions"
+              parent="menu_ads_sync_config"
+              action="action_ads_subscription"
+              sequence="10"/> -->
+
+    <!-- Configuration Menu -->
+    <!-- <menuitem id="menu_ads_sync_config"
+              name="Configuration"
+              parent="menu_ads_sync_root"
+              sequence="10"/> -->
+
+    <!-- Events Menu -->
+    <!-- <menuitem id="menu_ads_sync_events"
+              name="Events"
+              parent="menu_ads_sync_root"
+              sequence="15"/> -->
+
+    <!-- Push Events Menu Item -->
+    <!-- <menuitem id="menu_meta_event_push"
+              name="Push Events"
+              parent="menu_ads_sync_events"
+              action="action_meta_event_push"
+              sequence="10"/> -->
+
+    <!-- Monitoring Menu -->
+    <menuitem id="menu_ads_sync_monitoring"
+              name="Monitoring"
+              parent="menu_ads_sync_root"
+              sequence="20"/>
+
+    <!-- Webhook Events Menu Item -->
+    <menuitem id="menu_meta_webhook_events"
+              name="Meta Webhook Events"
+              parent="menu_ads_sync_monitoring"
+              action="action_meta_webhook_event"
+              sequence="10"/>
+
+    <!-- Monitor Pushed Events Menu Item -->
+    <menuitem id="menu_meta_event_push_monitor"
+              name="Monitor Pushed Events"
+              parent="menu_ads_sync_monitoring"
+              action="action_meta_event_push_monitor"
+              sequence="15"/>
+
+</odoo>

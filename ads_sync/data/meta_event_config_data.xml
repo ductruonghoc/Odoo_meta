@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- ==================== Lead Generation Events ==================== -->
+        
+        <record id="meta_event_lead" model="meta.event.config">
+            <field name="name">Lead</field>
+            <field name="technical_name">lead</field>
+            <field name="description">Triggered when a new lead is created in the CRM. This event helps Meta optimize for lead generation campaigns by tracking when potential customers show interest.</field>
+            <field name="category">lead</field>
+            <field name="trigger_model">crm.lead</field>
+            <field name="trigger_action">create</field>
+            <field name="sequence">1</field>
+            <field name="is_active">False</field>
+        </record>
+        
+        <record id="meta_event_qualified_lead" model="meta.event.config">
+            <field name="name">QualifiedLead</field>
+            <field name="technical_name">qualified_lead</field>
+            <field name="description">Triggered when a lead is converted to an opportunity. This is a high-value conversion event that indicates serious buyer intent and helps Meta find similar high-quality leads.</field>
+            <field name="category">lead</field>
+            <field name="trigger_model">crm.lead</field>
+            <field name="trigger_action">convert_opportunity</field>
+            <field name="sequence">2</field>
+            <field name="is_active">False</field>
+        </record>
+        
+        <record id="meta_event_won_opportunity" model="meta.event.config">
+            <field name="name">ConvertedLead</field>
+            <field name="technical_name">converted_lead</field>
+            <field name="description">Triggered when an opportunity is marked as Won. This is the highest-value lead event, indicating a successful conversion from lead to customer.</field>
+            <field name="category">lead</field>
+            <field name="trigger_model">crm.lead</field>
+            <field name="trigger_action">action_set_won_rainbowman</field>
+            <field name="sequence">3</field>
+            <field name="is_active">False</field>
+        </record>
+
+        <!-- ==================== Sales & Purchase Events ==================== -->
+        
+        <record id="meta_event_purchase" model="meta.event.config">
+            <field name="name">Purchase</field>
+            <field name="technical_name">purchase</field>
+            <field name="description">Triggered when a sale order is confirmed. This is the most important e-commerce conversion event, tracking actual purchases with revenue data.</field>
+            <field name="category">sales</field>
+            <field name="trigger_model">sale.order</field>
+            <field name="trigger_action">action_confirm</field>
+            <field name="sequence">10</field>
+            <field name="is_active">False</field>
+        </record>
+        
+        <record id="meta_event_initiate_checkout" model="meta.event.config">
+            <field name="name">InitiateCheckout</field>
+            <field name="technical_name">initiate_checkout</field>
+            <field name="description">Triggered when a quotation is sent to the customer. This indicates the customer is in the checkout/decision phase and helps track the sales funnel.</field>
+            <field name="category">sales</field>
+            <field name="trigger_model">sale.order</field>
+            <field name="trigger_action">action_quotation_sent</field>
+            <field name="sequence">11</field>
+            <field name="is_active">False</field>
+        </record>
+
+        <record id="meta_event_add_payment_info" model="meta.event.config">
+            <field name="name">AddPaymentInfo</field>
+            <field name="technical_name">add_payment_info</field>
+            <field name="description">Triggered when an invoice is posted/validated. This indicates the customer has committed to payment and is a strong purchase intent signal.</field>
+            <field name="category">sales</field>
+            <field name="trigger_model">account.move</field>
+            <field name="trigger_action">action_post</field>
+            <field name="sequence">12</field>
+            <field name="is_active">False</field>
+        </record>
+
+        <!-- ==================== User Engagement Events ==================== -->
+        
+        <record id="meta_event_contact" model="meta.event.config">
+            <field name="name">Contact</field>
+            <field name="technical_name">contact</field>
+            <field name="description">Triggered when a new contact/partner is created. This tracks customer engagement and helps build audiences based on contact interactions.</field>
+            <field name="category">engagement</field>
+            <field name="trigger_model">res.partner</field>
+            <field name="trigger_action">create</field>
+            <field name="sequence">20</field>
+            <field name="is_active">False</field>
+        </record>
+        
+        <record id="meta_event_schedule" model="meta.event.config">
+            <field name="name">Schedule</field>
+            <field name="technical_name">schedule</field>
+            <field name="description">Triggered when a meeting/activity is scheduled with a lead. This indicates active engagement and helps track the nurturing process.</field>
+            <field name="category">engagement</field>
+            <field name="trigger_model">calendar.event</field>
+            <field name="trigger_action">create</field>
+            <field name="sequence">21</field>
+            <field name="is_active">False</field>
+        </record>
+
+        <!-- ==================== Registration & Subscription Events ==================== -->
+        
+        <record id="meta_event_complete_registration" model="meta.event.config">
+            <field name="name">CompleteRegistration</field>
+            <field name="technical_name">complete_registration</field>
+            <field name="description">Triggered when a new portal user registers. This helps track user sign-ups and optimize campaigns for user acquisition.</field>
+            <field name="category">registration</field>
+            <field name="trigger_model">res.users</field>
+            <field name="trigger_action">create</field>
+            <field name="sequence">30</field>
+            <field name="is_active">False</field>
+        </record>
+        
+        <record id="meta_event_subscribe" model="meta.event.config">
+            <field name="name">Subscribe</field>
+            <field name="technical_name">subscribe</field>
+            <field name="description">Triggered when a user subscribes to a mailing list. This tracks email list growth and helps optimize for newsletter subscriptions.</field>
+            <field name="category">registration</field>
+            <field name="trigger_model">mailing.contact</field>
+            <field name="trigger_action">create</field>
+            <field name="sequence">31</field>
+            <field name="is_active">False</field>
+        </record>
+
+        <record id="meta_event_unsubscribe" model="meta.event.config">
+            <field name="name">Unsubscribe</field>
+            <field name="technical_name">unsubscribe</field>
+            <field name="description">Triggered when a user unsubscribes from a mailing list. This helps track list hygiene and engagement metrics.</field>
+            <field name="category">registration</field>
+            <field name="trigger_model">mailing.contact</field>
+            <field name="trigger_action">write</field>
+            <field name="sequence">32</field>
+            <field name="is_active">False</field>
+        </record>
+
+        <!-- ==================== E-commerce Events ==================== -->
+
+        <record id="meta_event_add_to_cart" model="meta.event.config">
+            <field name="name">AddToCart</field>
+            <field name="technical_name">add_to_cart</field>
+            <field name="description">Triggered when a product is added to a sale order. This tracks shopping cart additions and helps optimize for product interest.</field>
+            <field name="category">ecommerce</field>
+            <field name="trigger_model">sale.order.line</field>
+            <field name="trigger_action">create</field>
+            <field name="sequence">40</field>
+            <field name="is_active">False</field>
+        </record>
+
+        <record id="meta_event_view_content" model="meta.event.config">
+            <field name="name">ViewContent</field>
+            <field name="technical_name">view_content</field>
+            <field name="description">Triggered when a product is created/viewed. This tracks content engagement and helps optimize for product discovery campaigns.</field>
+            <field name="category">ecommerce</field>
+            <field name="trigger_model">product.product</field>
+            <field name="trigger_action">create</field>
+            <field name="sequence">41</field>
+            <field name="is_active">False</field>
+        </record>
+
+        <record id="meta_event_search" model="meta.event.config">
+            <field name="name">Search</field>
+            <field name="technical_name">search</field>
+            <field name="description">Triggered when a search is performed on leads. This tracks user intent and helps optimize for search-driven campaigns.</field>
+            <field name="category">ecommerce</field>
+            <field name="trigger_model">crm.lead</field>
+            <field name="trigger_action">search</field>
+            <field name="sequence">42</field>
+            <field name="is_active">False</field>
+        </record>
+
+        <record id="meta_event_view_category" model="meta.event.config">
+            <field name="name">ViewCategory</field>
+            <field name="technical_name">view_category</field>
+            <field name="description">Triggered when a product category is created. This tracks category browsing and helps optimize for category-specific campaigns.</field>
+            <field name="category">ecommerce</field>
+            <field name="trigger_model">product.category</field>
+            <field name="trigger_action">create</field>
+            <field name="sequence">43</field>
+            <field name="is_active">False</field>
+        </record>
+
+        <!-- ==================== Additional Sales Events ==================== -->
+
+        <record id="meta_event_initiate_checkout_create" model="meta.event.config">
+            <field name="name">InitiateCheckout</field>
+            <field name="technical_name">initiate_checkout</field>
+            <field name="description">Triggered when a sale order is created. This indicates the start of the checkout process and helps track conversion funnels.</field>
+            <field name="category">sales</field>
+            <field name="trigger_model">sale.order</field>
+            <field name="trigger_action">create</field>
+            <field name="sequence">13</field>
+            <field name="is_active">False</field>
+        </record>
+
+        <record id="meta_event_add_payment_info_payment" model="meta.event.config">
+            <field name="name">AddPaymentInfo</field>
+            <field name="technical_name">add_payment_info</field>
+            <field name="description">Triggered when a payment is created. This indicates payment setup and is a strong purchase intent signal.</field>
+            <field name="category">sales</field>
+            <field name="trigger_model">account.payment</field>
+            <field name="trigger_action">create</field>
+            <field name="sequence">14</field>
+            <field name="is_active">False</field>
+        </record>
+
+        <!-- ==================== Profile & Engagement Events ==================== -->
+
+        <record id="meta_event_update_profile" model="meta.event.config">
+            <field name="name">UpdateProfile</field>
+            <field name="technical_name">update_profile</field>
+            <field name="description">Triggered when a partner/contact profile is updated. This tracks user engagement and profile completeness.</field>
+            <field name="category">engagement</field>
+            <field name="trigger_model">res.partner</field>
+            <field name="trigger_action">write</field>
+            <field name="sequence">22</field>
+            <field name="is_active">False</field>
+        </record>
+
+    </data>
+</odoo>

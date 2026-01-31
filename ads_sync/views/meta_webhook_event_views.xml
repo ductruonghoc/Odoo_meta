@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Form View -->
+    <record id="view_meta_webhook_event_form" model="ir.ui.view">
+        <field name="name">ads.meta.webhook.event.form</field>
+        <field name="model">ads.meta.webhook.event</field>
+        <field name="arch" type="xml">
+            <form string="Meta Webhook Event">
+                <header>
+                    <button name="action_mark_processed" string="Mark Processed" type="object" 
+                            class="btn-primary" invisible="state in ('processed', 'ignored')"/>
+                    <button name="action_mark_ignored" string="Mark Ignored" type="object" 
+                            class="btn-secondary" invisible="state in ('processed', 'ignored')"/>
+                    <button name="action_reprocess" string="Reprocess" type="object" 
+                            invisible="state not in ('processed', 'error', 'ignored')"/>
+                    <field name="state" widget="statusbar" statusbar_visible="received,processing,processed"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Event Details">
+                            <field name="event_type"/>
+                            <field name="object_type"/>
+                            <field name="entry_id"/>
+                            <field name="received_at"/>
+                        </group>
+                        <group string="Source">
+                            <field name="source_ip"/>
+                            <field name="subscription_id"/>
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Payload (Formatted)" name="payload_formatted">
+                            <field name="payload_formatted" readonly="1" nolabel="1" 
+                                   widget="ace" options="{'mode': 'json'}"/>
+                        </page>
+                        <page string="Raw Payload" name="payload_raw">
+                            <field name="payload_json" readonly="1" nolabel="1"/>
+                        </page>
+                        <page string="Processing Notes" name="notes" invisible="not processing_notes">
+                            <field name="processing_notes" readonly="1" nolabel="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- List View -->
+    <record id="view_meta_webhook_event_list" model="ir.ui.view">
+        <field name="name">ads.meta.webhook.event.list</field>
+        <field name="model">ads.meta.webhook.event</field>
+        <field name="arch" type="xml">
+            <list string="Meta Webhook Events" default_order="received_at desc" 
+                  decoration-success="state == 'processed'"
+                  decoration-warning="state == 'processing'"
+                  decoration-danger="state == 'error'"
+                  decoration-muted="state == 'ignored'">
+                <field name="received_at"/>
+                <field name="event_type"/>
+                <field name="object_type"/>
+                <field name="entry_id"/>
+                <field name="subscription_id"/>
+                <field name="source_ip"/>
+                <field name="state" widget="badge" 
+                       decoration-success="state == 'processed'"
+                       decoration-warning="state == 'processing'"
+                       decoration-danger="state == 'error'"
+                       decoration-info="state == 'received'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <!-- <record id="view_meta_webhook_event_search" model="ir.ui.view">
+        <field name="name">ads.meta.webhook.event.search</field>
+        <field name="model">ads.meta.webhook.event</field>
+        <field name="arch" type="xml">
+            <search string="Search Webhook Events">
+                <field name="event_type"/>
+                <field name="object_type"/>
+                <field name="entry_id"/>
+                <field name="payload_json"/>
+                <field name="subscription_id"/>
+                <separator/>
+                <filter string="Today" name="today" 
+                        domain="[('received_at', '>=', (context_today()).strftime('%Y-%m-%d')),
+                                 ('received_at', '&lt;', (context_today() + relativedelta(days=1)).strftime('%Y-%m-%d'))]"/>
+                <filter string="Last 7 Days" name="last_week" 
+                        domain="[('received_at', '>=', (context_today() - relativedelta(days=7)).strftime('%Y-%m-%d'))]"/>
+                <separator/>
+                <filter string="Received" name="received" domain="[('state', '=', 'received')]"/>
+                <filter string="Processing" name="processing" domain="[('state', '=', 'processing')]"/>
+                <filter string="Processed" name="processed" domain="[('state', '=', 'processed')]"/>
+                <filter string="Errors" name="errors" domain="[('state', '=', 'error')]"/>
+                <filter string="Ignored" name="ignored" domain="[('state', '=', 'ignored')]"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter string="Event Type" name="group_event_type" context="{'group_by': 'event_type'}"/>
+                    <filter string="Object Type" name="group_object_type" context="{'group_by': 'object_type'}"/>
+                    <filter string="Status" name="group_state" context="{'group_by': 'state'}"/>
+                    <filter string="Subscription" name="group_subscription" context="{'group_by': 'subscription_id'}"/>
+                    <filter string="Received Date" name="group_date" context="{'group_by': 'received_at:day'}"/>
+                </group>
+            </search>
+        </field>
+    </record> -->
+
+    <!-- Action -->
+    <record id="action_meta_webhook_event" model="ir.actions.act_window">
+        <field name="name">Webhook Events</field>
+        <field name="res_model">ads.meta.webhook.event</field>
+        <field name="view_mode">list,form</field>
+        <!-- <field name="search_view_id" ref="view_meta_webhook_event_search"/> -->
+        <field name="context">{'search_default_today': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No webhook events received yet
+            </p>
+            <p>
+                Meta webhook events will appear here as they are received.
+                Configure your webhook URL in Meta Events Manager.
+            </p>
+        </field>
+    </record>
+
+</odoo>

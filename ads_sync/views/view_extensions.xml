@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- CRM Lead/Opportunity Form View - Header Placement -->
+    <record id="view_crm_lead_form_meta_event" model="ir.ui.view">
+        <field name="name">crm.lead.form.meta.event</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <!-- Add to the header for easy access -->
+            <xpath expr="//header" position="inside">
+                <div class="ms-auto d-flex align-items-center" groups="base.group_system">
+                    <label for="meta_event_enabled" class="me-2 mb-0" string="Meta Tracking"/>
+                    <field name="meta_event_enabled" 
+                           widget="boolean_toggle" 
+                           nolabel="1"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Sale Order Form View - Header Placement -->
+    <record id="view_sale_order_form_meta_event" model="ir.ui.view">
+        <field name="name">sale.order.form.meta.event</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <!-- Add to the header for easy access -->
+            <xpath expr="//header" position="inside">
+                <div class="ms-auto d-flex align-items-center" groups="base.group_system">
+                    <label for="meta_event_enabled" class="me-2 mb-0" string="Meta Tracking"/>
+                    <field name="meta_event_enabled" 
+                           widget="boolean_toggle" 
+                           nolabel="1"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Partner/Contact Form View - Header Placement -->
+    <record id="view_partner_form_meta_event" model="ir.ui.view">
+        <field name="name">res.partner.form.meta.event</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <!-- Add to the sheet div (since partners don't have a standard header) -->
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <div class="ms-auto d-flex align-items-center" groups="base.group_system">
+                        <label for="meta_event_enabled" class="me-2 mb-0" string="Meta Tracking"/>
+                        <field name="meta_event_enabled" 
+                               widget="boolean_toggle" 
+                               nolabel="1"/>
+                    </div>
+                </header>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- User Form View - Header Placement -->
+    <record id="view_users_form_meta_event" model="ir.ui.view">
+        <field name="name">res.users.form.meta.event</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <!-- Add to the sheet div (since users don't have a standard header) -->
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <div class="ms-auto d-flex align-items-center" groups="base.group_system">
+                        <label for="meta_event_enabled" class="me-2 mb-0" string="Meta Tracking"/>
+                        <field name="meta_event_enabled" 
+                               widget="boolean_toggle" 
+                               nolabel="1"/>
+                    </div>
+                </header>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Invoice/Bill Form View - Header Placement -->
+    <record id="view_account_move_form_meta_event" model="ir.ui.view">
+        <field name="name">account.move.form.meta.event</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <!-- Add to the header for easy access -->
+            <xpath expr="//header" position="inside">
+                <div class="ms-auto d-flex align-items-center" groups="base.group_system">
+                    <label for="meta_event_enabled" class="me-2 mb-0" string="Meta Tracking"/>
+                    <field name="meta_event_enabled" 
+                           widget="boolean_toggle" 
+                           nolabel="1"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Product Form View - Header Placement -->
+    <record id="view_product_product_form_meta_event" model="ir.ui.view">
+        <field name="name">product.product.form.meta.event</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <!-- Add to the header for easy access -->
+            <xpath expr="//sheet" position="inside">
+                <div class="ms-auto d-flex align-items-center" groups="base.group_system">
+                    <label for="meta_event_enabled" class="me-2 mb-0" string="Meta Tracking"/>
+                    <field name="meta_event_enabled" 
+                           widget="boolean_toggle" 
+                           nolabel="1"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Payment Form View - Header Placement -->
+    <record id="view_account_payment_form_meta_event" model="ir.ui.view">
+        <field name="name">account.payment.form.meta.event</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="arch" type="xml">
+            <!-- Add to the header for easy access -->
+            <xpath expr="//header" position="inside">
+                <div class="ms-auto d-flex align-items-center" groups="base.group_system">
+                    <label for="meta_event_enabled" class="me-2 mb-0" string="Meta Tracking"/>
+                    <field name="meta_event_enabled" 
+                           widget="boolean_toggle" 
+                           nolabel="1"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Product Category Form View - Header Placement -->
+    <record id="view_product_category_form_meta_event" model="ir.ui.view">
+        <field name="name">product.category.form.meta.event</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="product.product_category_form_view"/>
+        <field name="arch" type="xml">
+            <!-- Add to the sheet div -->
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <div class="ms-auto d-flex align-items-center" groups="base.group_system">
+                        <label for="meta_event_enabled" class="me-2 mb-0" string="Meta Tracking"/>
+                        <field name="meta_event_enabled" 
+                               widget="boolean_toggle" 
+                               nolabel="1"/>
+                    </div>
+                </header>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Add to tree/list views for quick editing (optional but recommended) -->
+    <record id="view_crm_lead_tree_meta_event" model="ir.ui.view">
+        <field name="name">crm.lead.tree.meta.event</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="inside">
+                <field name="meta_event_enabled" 
+                       string="Meta Tracking"
+                       optional="hide"
+                       widget="boolean_toggle"
+                       groups="base.group_system"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_sale_order_tree_meta_event" model="ir.ui.view">
+        <field name="name">sale.order.tree.meta.event</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="inside">
+                <field name="meta_event_enabled" 
+                       string="Meta Tracking"
+                       optional="hide"
+                       widget="boolean_toggle"
+                       groups="base.group_system"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_partner_tree_meta_event" model="ir.ui.view">
+        <field name="name">res.partner.tree.meta.event</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="inside">
+                <field name="meta_event_enabled" 
+                       string="Meta Tracking"
+                       optional="hide"
+                       widget="boolean_toggle"
+                       groups="base.group_system"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_account_move_tree_meta_event" model="ir.ui.view">
+        <field name="name">account.move.tree.meta.event</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_invoice_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="inside">
+                <field name="meta_event_enabled" 
+                       string="Meta Tracking"
+                       optional="hide"
+                       widget="boolean_toggle"
+                       groups="base.group_system"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_product_product_tree_meta_event" model="ir.ui.view">
+        <field name="name">product.product.tree.meta.event</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_product_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="inside">
+                <field name="meta_event_enabled" 
+                       string="Meta Tracking"
+                       optional="hide"
+                       widget="boolean_toggle"
+                       groups="base.group_system"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_account_payment_tree_meta_event" model="ir.ui.view">
+        <field name="name">account.payment.tree.meta.event</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="inside">
+                <field name="meta_event_enabled" 
+                       string="Meta Tracking"
+                       optional="hide"
+                       widget="boolean_toggle"
+                       groups="base.group_system"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_product_category_tree_meta_event" model="ir.ui.view">
+        <field name="name">product.category.tree.meta.event</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="product.product_category_list_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="inside">
+                <field name="meta_event_enabled" 
+                       string="Meta Tracking"
+                       optional="hide"
+                       widget="boolean_toggle"
+                       groups="base.group_system"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
